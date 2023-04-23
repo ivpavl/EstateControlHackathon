@@ -5,8 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Home</title>
-    <link rel="stylesheet" href="http://localhost:5117/src/registration.css">
-    <link rel="stylesheet" href="http://localhost:5117/src/login.css">
+    <link rel="stylesheet" href="/src/registration.css">
+    <link rel="stylesheet" href="/src/login.css">
+    <link rel="stylesheet" href="/src/styles.css">
     <link rel="preconnect" href="http://fonts.googleapis.com ">
     <link rel="preconnect" href="http://fonts.gstatic.com ">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap ">
@@ -54,10 +55,10 @@
         <div class="pop_up_container">
          <div class="pop_up_body" id="pop_up_body">
               <p>Введіть ваші дані</p>
-              <form id="registerForm">
+              <form>
                 <input class="input js-input" type="text" id="name" placeholder="Ім'я">
                 <input class="input js-input" type="password" id="password" placeholder="Пароль">
-                <button type="submit">Реєстрація</button> 
+                <button id="registerForm" type="submit">Реєстрація</button> 
                </form>
             <div class="pop_up_close" id="pop_up_close">&#10006</div>
           </div>

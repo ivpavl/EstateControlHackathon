@@ -30,3 +30,113 @@ a {
   width: 90%;
   margin: 0 auto;
 }
+
+
+html {
+  height: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+
+body {
+  background-image: url(/src/img/house_background.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+}
+title {
+  font-family: "Marker Felt", fantasy;
+}
+
+.text{
+  position: relative;
+  left: 3%;
+  font-family: Andale Mono, monospace;
+  font-size: 17px;
+  color: rgb(255, 255, 255);
+}
+nav {
+  position: relative;
+  top: 5%;
+  padding-top: 5px;
+  padding-bottom: 8px;
+  background: rgba(255, 255, 255, 0.4);
+  margin-bottom: 40px;
+}
+.navbar {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+.page-name {
+  font-size: 20px;
+}
+
+.page-content {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.reg1 {
+  position: relative;
+  left: 85%;
+  text-align: center;
+  width: 12%;
+  font-family: Marker Felt, fantasy;
+  font-size: 20px;
+  background-color: orange;
+  padding: 12px 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+}
+.reg2 {
+  text-align: center;
+  top: 3px;
+  position: relative;
+  left: 85%;
+  width: 12%;
+  font-family: Marker Felt, fantasy;
+  font-size: 20px;
+  background-color: orange;
+  padding: 15px 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+}
+
+h2 {
+  position: relative;
+  left: 3%;
+  font-family: Andale Mono, monospace;
+  font-size: 30px;
+  color: white;
+}
+
+h1 {
+  position: relative;
+  top: 3%;
+  left: 3%;
+  font-family: Andale Mono, monospace;
+  font-size: 50px;
+  color: black;
+}
+
+.input {
+  position: relative;
+  left: 3%;
+  width: 13%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
