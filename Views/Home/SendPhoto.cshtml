@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Add Object</title>
+</head>
+<body>
+    <form id="addObjectForm">
+            <div>
+            <label for="inputAdress" class="form-label">Адреса</label>
+            <input
+              type="text"
+              name="address"
+              class="form-control input-display"
+              id="inputAdress"
+            />
+          </div>
+          <div>
+            <label for="inputArea" class="form-label">Площа</label>
+            <input
+              type="text"
+              name="area"
+              class="form-control input-display"
+              id="inputArea"
+            />
+          </div>
+          <div>
+            <label for="inputRooms" class="form-label">Кількість кімнат</label>
+            <input
+              type="text"
+              name="RoomsNum"
+              class="form-control input-display"
+              id="inputRooms"
+            />
+          </div>
+          <div>
+            <label for="inputPrice" class="form-label">Ціна</label>
+            <input
+              type="text"
+              name="Price"
+              class="form-control input-display"
+              id="inputPrice"
+            />
+          </div>
+
+          <div>
+            <label for="inputNotes" class="form-label">Примітки</label>
+            <input
+              type="text"
+              name="notes"
+              class="form-control input-display"
+              id="inputNotes"
+            />
+          </div>
+
+          <div>
+            <label for="objectPhoto"></label>
+            <input
+              type="file"
+              class="form-control"
+              id="objectPhoto"
+              accept="image/jpeg, image/png"
+              name="file"
+            />
+          </div>
+
+          <button type="submit">Add Object</button>
+    </form>
+
+    <script>
+        const form = document.getElementById('addObjectForm');
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch('/api/estate/add', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    alert('Object added successfully');
+                } else {
+                    const errorMessage = await response.text();
+                    alert(`Failed to add object: ${errorMessage}`);
+                }
+            } catch (error) {
+                alert(`Failed to add object: ${error}`);
+            }
+        });
+    </script>
+</body>
+</html>
