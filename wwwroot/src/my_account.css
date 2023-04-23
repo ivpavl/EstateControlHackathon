@@ -1,0 +1,12 @@
+.container {
+  position: absolute;
+  top: 100px;
+  left: 130px;
+}
+h1 {
+  font-size: 60px;
+}
+.account-options {
+  font-size: 30px;
+  padding-bottom: 6px;
+}

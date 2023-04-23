@@ -6,6 +6,7 @@ using TestTask.Data.Services;
 using TestTask.Data.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using System.Linq;
 
 namespace TestTask.Controllers;
 
@@ -31,7 +32,7 @@ public class HomeController : Controller
 
         return View();
     }
-    public IActionResult SendPhoto()
+    public IActionResult AddEstate()
     {
         return View();
     }
@@ -41,6 +42,10 @@ public class HomeController : Controller
         // var userId =  HttpContext.User.Claims.FirstOrDefault(ClaimTypes.NameIdentifier);
         var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         return View(new UserModel(){Id=1, Name="2", Password = "3"});
+    }
+    public IActionResult Estate()
+    {
+        return View();
     }
 
 

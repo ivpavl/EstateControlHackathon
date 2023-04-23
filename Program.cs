@@ -148,7 +148,7 @@ app.UseSwaggerUI(options =>
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Login}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.UseAuthentication();
 app.UseRouting();

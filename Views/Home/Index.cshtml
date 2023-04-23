@@ -1,56 +1,93 @@
-@model UserModel
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script
-      src="https://kit.fontawesome.com/8afa63d3d7.js"
-      crossorigin="anonymous"
-    ></script>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous"
-    />
-    <script>
-      var a = @Model.Id;
-    </script>
-    <link rel="stylesheet" href="/src/styles.css" />
-    <link rel="stylesheet" href="/src/real_estate.css" />
-    <title>Моя нерухомість</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Home</title>
+    <link rel="stylesheet" href="http://localhost:5117/src/registration.css">
+    <link rel="stylesheet" href="http://localhost:5117/src/login.css">
+    <link rel="preconnect" href="http://fonts.googleapis.com ">
+    <link rel="preconnect" href="http://fonts.gstatic.com ">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap ">
   </head>
   <body>
-    <nav class="navbar">
-      <div class="container-fluid">
-        <div class="page-name">Моя нерухомість</div>
-        <div class="link"><a href="/my_account.html">Мій кабінет</a></div>
+    <header>
+      <h1>My Home</h1>
+     <div> 
+        <nav>
+        <ul>
+          <li><a asp-controller="Home" asp-action="Estate">Моє</a></li>
+          <li><a href="Зареєструватись">Зареєструватися</a></li>
+         
+         </ul>
+       </nav>
+     </div>
+   </header>
+   
+  <section id="about">
+        <h2>Про нас</h2>
+        <p class="text"> Приві.Це онлайн-інструмент для власників квартир , 
+            який допоможе вам організувати і керувати своєю власністю , збирати та організовувати різну інформацію.</p>
+      </section>
+      <section id="features">
+        <h2>Особливості</h2>
+        <ul>
+          <li>Можливість управлінням нерухомістю</li>
+          <li>Фідстежування статусів та  фінансофих операцій </li>
+          <li>Фідстежування інших додткових функцій 
+            для власників нерухомості</li>
+        </ul>
+        </section>
+     <h3>Наші контакти</h3>
+      <div>
+        <p class="phone">+380928842169</p>
+        <p class="phone">+380925385384</p>
+      </div>  
+
+     
+  <div> 
+    <div class="button">
+        <a href="#" id="open_pop_up">Створити обліковий запис</a>
       </div>
-    </nav>
-    <div class="container">
-      <div class="row">
-        <div class="col-7">
-          <a href="/add_unit.htm" class="add-unit button">
-            <i class="fa-solid fa-circle-plus"></i>
-            Додати нерухомість
-          </a>
-        </div>
-        <div class="filters col-4">
-          <div class="buttons-first-row">
-            <button class="button filter-button">Продано</button>
-            <button class="button filter-button">Активно</button>
-            <button class="button filter-button">В оренді</button>
-          </div>
-          <div class="buttons-second-row">
-            <button class="button filter-button">Готово для оренди</button>
-            <button class="button filter-button">Архівовано</button>
+      <div class="pop_up" id="pop_up">
+        <div class="pop_up_container">
+         <div class="pop_up_body" id="pop_up_body">
+              <p>Введіть ваші дані</p>
+              <form id="registerForm">
+                <input class="input js-input" type="text" id="name" placeholder="Ім'я">
+                <input class="input js-input" type="password" id="password" placeholder="Пароль">
+                <button type="submit">Реєстрація</button> 
+               </form>
+            <div class="pop_up_close" id="pop_up_close">&#10006</div>
           </div>
         </div>
+      </div>
+      <script src="src/registration.js"></script>
+</div>
+<br><br>
+<div> 
+  <div class="button">
+    <a href="#" id="open_pop_up_2">Вхід</a>
+  </div>
+  <div class="pop_up" id="pop_up_2">
+    <div class="pop_up_container">
+      <div class="pop_up_body" id="pop_up_body_2">
+        <p>Введіть ваші дані</p>
+        <form  action="novalidate">
+          <input  type="tel"  placeholder="Телефон">
+          <input  type="email" placeholder="Емайл">
+          <input  type="password" placeholder="Пароль">
+          <button>Увійти</button> 
+        </form>
+        <div class="pop_up_close" id="pop_up_close_2">&#10006</div>
       </div>
     </div>
+  </div>
+  <script src="src/login.js"></script>
+</div>
+
+     
   </body>
 </html>
 

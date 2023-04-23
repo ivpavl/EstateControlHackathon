@@ -1,0 +1,27 @@
+.new-object-form {
+  width: 60%;
+  margin: 0 auto;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 0.5rem;
+}
+.form-field {
+  margin-bottom: 10px;
+}
+.form-field.error input {
+  border-color: rgb(221, 7, 39);
+}
+.form-field.success input {
+  border-color: rgb(19, 205, 9);
+}
+small {
+  font-size: 12px;
+  opacity: 0.8;
+}
+.submit-button {
+  font-size: 1rem;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

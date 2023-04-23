@@ -66,7 +66,7 @@ public class EstateService : IEstateService
                 await photo.CopyToAsync(stream);
             }
 
-            return fileName + ".png";
+            return fileName;
         }
         catch
         {

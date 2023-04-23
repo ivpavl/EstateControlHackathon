@@ -1,0 +1,32 @@
+html {
+  height: 100%;
+}
+body {
+  background-image: url(/src/img/house_background.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  font-family: Montserrat;
+}
+nav {
+  padding: 0 auto;
+  background: rgba(255, 255, 255, 0.4);
+  margin-bottom: 40px;
+}
+.navbar {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+.page-name {
+  font-size: 20px;
+}
+
+.page-content {
+  width: 90%;
+  margin: 0 auto;
+}

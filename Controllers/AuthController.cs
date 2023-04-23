@@ -50,7 +50,7 @@ public class AuthController : ControllerBase
     [HttpPost]
     [AllowAnonymous]
     [Route("signup")]
-    public async Task<IActionResult> Register([FromBody]LoginUserModel model)
+    public async Task<IActionResult> Register(LoginUserModel model)
     {
         var (user, isSuccessful) = await _auth.Register(model);
         if(isSuccessful)

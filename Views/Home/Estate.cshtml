@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/8afa63d3d7.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="preconnect" href="http://fonts.googleapis.com ">
+    <link rel="preconnect" href="http://fonts.gstatic.com ">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap ">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/src/styles.css" />
+    <link rel="stylesheet" href="/src/real_estate.css" />
+    <title>Моя нерухомість</title>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="container-fluid">
+        <div class="page-name">Моя нерухомість</div>
+        <div class="link"><a href="/my_account.html">Мій кабінет</a></div>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="row">
+        <div class="col-7 estate-list">
+
+          <div class="unit-card">
+            <div class="row">
+              <div class="col-6 description">
+                Просп. Степана Бандери, 16Б, Київ
+              </div>
+              <div class="status col-6">В оренді</div>
+            </div>
+            <div class="area description">Площа: 200 кв.м.</div>
+            <div class="rooms description">Кількість кімнат: 4</div>
+            <div class="price description">666 грн</div>
+            <div><img class="unit-photo" src="/src/img/unit_photo.jpg" /></div>
+          </div>
+
+<script>
+fetch('http://localhost:5117/api/Estate/getlist')
+  .then(response => response.json())
+  .then(data => {
+    const estateList = data.userEstateList;
+    const html = estateList.map(estate => {
+      return `
+        <div class="unit-card">
+          <div class="row">
+            <div class="col-6 description">
+              ${estate.Address}
+            </div>
+            <div class="status col-6">${estate.StatusId === 0 ? 'В оренді' : 'Продано'}</div>
+          </div>
+          <div class="area description">Площа: ${estate.Area} кв.м.</div>
+          <div class="rooms description">Кількість кімнат: ${estate.RoomsNum}</div>
+          <div class="price description">${estate.Price} грн</div>
+          <div><img class="unit-photo" src="/uploads/${estate.Photo}" /></div>
+        </div>
+      `;
+    }).join('');
+    
+    document.querySelector('.estate-list').innerHTML = html;
+  });
+
+</script>
+
+          <div class="unit-card">
+            <div class="row">
+              <div class="col-6 description">
+                Просп. Степана Бандери, 16Б, Київ
+              </div>
+              <div class="status col-6">В оренді</div>
+            </div>
+            <div class="area description">Площа: 200 кв.м.</div>
+            <div class="rooms description">Кількість кімнат: 4</div>
+            <div class="price description">666 грн</div>
+            <div><img class="unit-photo" src="/src/img/unit_photo.jpg" /></div>
+          </div>
+
+
+        </div>
+        <div class="filters col-4">
+          <div class="buttons-first-row">
+            <button class="button filter-button">Продано</button>
+            <button class="button filter-button">Активно</button>
+            <button class="button filter-button">В оренді</button>
+          </div>
+          <div class="buttons-second-row">
+            <button class="button filter-button">Готово для оренди</button>
+            <button class="button filter-button">Архівовано</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
