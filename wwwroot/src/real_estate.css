@@ -18,33 +18,13 @@
   color: black;
   opacity: 0.9;
 }
-.unit-card {
-  max-width: 80%;
-  padding: 30px;
-  background: rgba(255, 255, 255, 0.7);
-  border-radius: 20px;
-  text-align: center;
-}
-.description {
-  text-align: left;
-  font-size: 15px;
-}
-.status {
-  text-align: end;
-  font-size: 13px;
-  opacity: 0.9;
-}
-.unit-photo {
-  margin-top: 10px;
-  max-width: 600px;
-  border-radius: 20px;
-  transition: 500ms ease-in-out;
-}
-.unit-photo:hover {
-  transform: scale(1.1);
+.add-unit {
+  margin: 0 70px;
+  padding: 30px 60px;
+  font-size: 25px;
 }
 .filters {
-  font-size: 13px;
+  font-size: 15px;
 }
 .buttons-second-row {
   padding-left: 20px;

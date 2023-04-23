@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/styles.css" />
+    <link rel="stylesheet" href="/src/my_account.css" />
+    <title>Мій кабінет</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="page-content"></div>
+      <h1>Мій кабінет</h1>
+      <div class="account-options">
+        <a asp-controller="Home" asp-action="Estate">Моя нерухомість</a>
+      </div>
+      <div class="account-options">
+        <a asp-controller="Home" asp-action="Notification">Налаштування сповіщеннь</a>
+      </div>
+      <div class="account-options">
+        <a asp-controller="Home" asp-action="AddCard">Прив'язати карту</a>
+      </div>
+      <div class="account-options">
+        <a asp-controller="Home" asp-action="PaymentHistory">Історія операцій</a>
+      </div>
+      <div class="account-options">
+        <a href="/dim_ria_integration.html">Розміщення на DOM.RIA</a>
+      </div>
+    </div>
+  </body>
+</html>

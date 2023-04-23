@@ -7,7 +7,6 @@ body {
   background-size: cover;
   background-position: center;
   height: 100%;
-  font-family: Montserrat;
 }
 nav {
   padding: 0 auto;
@@ -25,13 +24,6 @@ a {
 .page-name {
   font-size: 20px;
 }
-
-.page-content {
-  width: 90%;
-  margin: 0 auto;
-}
-
-
 html {
   height: 100%;
   max-width: 100%;

@@ -28,18 +28,35 @@ public class HomeController : Controller
     [AllowAnonymous]
     public IActionResult Login()
     {
-
-
         return View();
     }
     public IActionResult AddEstate()
     {
         return View();
     }
+    public IActionResult MyCab()
+    {
+        return View();
+    }
+    public IActionResult Notification()
+    {
+        return View();
+    }
+    public IActionResult AddCard()
+    {
+        return View();
+    }
+    public IActionResult PaymentHistory()
+    {
+        return View();
+    }
+    public IActionResult AddUnit()
+    {
+        return View();
+    }
 
     public IActionResult Index()
     {
-        // var userId =  HttpContext.User.Claims.FirstOrDefault(ClaimTypes.NameIdentifier);
         var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         return View(new UserModel(){Id=1, Name="2", Password = "3"});
     }

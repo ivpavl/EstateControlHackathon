@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Home</title>
     <link rel="stylesheet" href="/src/registration.css">
-    <link rel="stylesheet" href="/src/login.css">
     <link rel="stylesheet" href="/src/styles.css">
     <link rel="preconnect" href="http://fonts.googleapis.com ">
     <link rel="preconnect" href="http://fonts.gstatic.com ">
@@ -18,7 +17,7 @@
      <div> 
         <nav>
         <ul>
-          <li><a asp-controller="Home" asp-action="Estate">Моє</a></li>
+          <li><a asp-controller="Home" asp-action="MyCab">Увійти  у кабінет</a></li>
           <li><a href="Зареєструватись">Зареєструватися</a></li>
          
          </ul>
@@ -28,24 +27,29 @@
    
   <section id="about">
         <h2>Про нас</h2>
-        <p class="text"> Приві.Це онлайн-інструмент для власників квартир , 
-            який допоможе вам організувати і керувати своєю власністю , збирати та організовувати різну інформацію.</p>
+        <p class="text"> Привіт.Це онлайн-інструмент для власників квартир, 
+            який допоможе вам організувати і керувати своєю власністю, збирати та організовувати різну інформацію.</p>
       </section>
       <section id="features">
         <h2>Особливості</h2>
         <ul>
-          <li>Можливість управлінням нерухомістю</li>
-          <li>Фідстежування статусів та  фінансофих операцій </li>
-          <li>Фідстежування інших додткових функцій 
+          <li class="text">Можливість управлінням нерухомістю</li>
+          <li class="text">Фідстежування статусів та  фінансофих операцій </li>
+          <li class="text">Фідстежування інших додткових функцій 
             для власників нерухомості</li>
         </ul>
         </section>
-     <h3>Наші контакти</h3>
+     <h2>Наші контакти</h2>
       <div>
-        <p class="phone">+380928842169</p>
-        <p class="phone">+380925385384</p>
+        <p class="text">+380928842169</p>
+        <p class="text">+380925385384</p>
       </div>  
-
+      <div>
+        <p class="text">Залишились запитання:)?</p>
+        <label class="text" for="phone">Залиш номер телефону і ми тобі зателефонуємо:
+        </label>
+		<input class="input" placeholder="phone" type="tel" id="phone" name="phone">
+      </div>
      
   <div> 
     <div class="button">
@@ -55,10 +59,13 @@
         <div class="pop_up_container">
          <div class="pop_up_body" id="pop_up_body">
               <p>Введіть ваші дані</p>
-              <form>
-                <input class="input js-input" type="text" id="name" placeholder="Ім'я">
-                <input class="input js-input" type="password" id="password" placeholder="Пароль">
-                <button id="registerForm" type="submit">Реєстрація</button> 
+              <form class="js-form" action="novalidate">
+                <input class="input js-input" type="text" placeholder="Ім'я">
+                <input class="input js-input" type="text" placeholder="Прізвище">
+                <input class="input js-input" type="tel"  placeholder="Телефон">
+                <input class="input js-input" type="email" placeholder="Емейл">
+                <input class="input js-input" type="password" placeholder="Пароль">
+                <button>Реєстрація</button> 
                </form>
             <div class="pop_up_close" id="pop_up_close">&#10006</div>
           </div>
@@ -91,4 +98,3 @@
      
   </body>
 </html>
-
