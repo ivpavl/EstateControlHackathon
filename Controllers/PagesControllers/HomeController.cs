@@ -13,18 +13,7 @@ namespace TestTask.Controllers;
 [Authorize]
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
-    // private readonly ISession _session;
 
-    public HomeController(
-        ILogger<HomeController> logger
-        // IHttpContextAccessor httpContextAccessor
-        )
-    {
-        _logger = logger;
-        // _session = httpContextAccessor.HttpContext.Session;
-
-    }
     [AllowAnonymous]
     public IActionResult Login()
     {

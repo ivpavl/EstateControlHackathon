@@ -19,11 +19,11 @@ public class NotifyController : ControllerBase
 {
 
     private readonly AppDbContext _context;
-    private readonly IUserService _user;
+    private readonly IAuthService _user;
     private readonly IEstateService _estate;
     private readonly INotifyService _notify;
 
-    public NotifyController(AppDbContext context, IUserService user, IEstateService estate, INotifyService notify) 
+    public NotifyController(AppDbContext context, IAuthService user, IEstateService estate, INotifyService notify) 
     {
         _context = context;
         _user = user;

@@ -19,11 +19,11 @@ public class EstateController : ControllerBase
 {
 
     private readonly AppDbContext _context;
-    private readonly IUserService _user;
+    private readonly IAuthService _user;
     private readonly IEstateService _estate;
     private readonly IWebHostEnvironment _environment;
 
-    public EstateController(AppDbContext context, IUserService user, IEstateService estate, IWebHostEnvironment environment) 
+    public EstateController(AppDbContext context, IAuthService user, IEstateService estate, IWebHostEnvironment environment) 
     {
         _context = context;
         _user = user;

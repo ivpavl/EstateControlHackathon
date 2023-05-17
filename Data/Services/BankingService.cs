@@ -5,9 +5,9 @@ namespace TestTask.Data.Services;
 public class BankingService : IBankingService
 {
     private readonly AppDbContext _context;
-    private readonly IUserService _user;
+    private readonly IAuthService _user;
 
-    public BankingService(AppDbContext context, IUserService user)
+    public BankingService(AppDbContext context, IAuthService user)
     {
         _context = context;
         _user = user;

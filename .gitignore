@@ -24,6 +24,10 @@ obj/
 # Built Visual Studio Code Extensions
 *.vsix
 
+# Ignore db files
+*.db-shm
+*.db-wal
+
 ### VisualStudioCode Patch ###
 # Ignore all local history of files
 .history
