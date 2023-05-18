@@ -1,27 +1,33 @@
-# ASP.NET MVC Test task for hackathon
+# ASP.NET WebApi + MVC project for hackathon!
 
-## Running This Example
+## I was mainly responsible for the backend part of the project.
 
-### Clone this repository
+###### 24 hours was probably too short for us, so we didn't show the finished project.
 
-`git clone https://github.com/ivpavl/TestTask.git`
+###### But I left this project on GitHub and finalized it after a while.
+
+
+
+### How to make it work?
+
+Clone this repository
+
+`git clone git@github.com:ivpavl/EstateControlHackathon.git`
 
 Navigate to the folder where the project file is located and type the following:
 
 `dotnet run`
 
-### Change appsettings if needed
+#### To change the path to the db, use appsettings.json.
 
-Replace what ever you need in the `appsettings.json`
+### What is this project about?
 
+In general, a platform for real estate management, with current features:
 
+- Singin/Signup ability
 
-### Where to change ingredients?
+- Add/remove your real estate
 
-`Data/Static`
+- Make notifications to other users
 
-### 
-
-### Where to change Db?
-
-`appsettings.json`
+- Add your bank card
