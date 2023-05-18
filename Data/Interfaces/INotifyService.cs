@@ -7,6 +7,7 @@ public interface INotifyService
         Task SubscribeUser(int userId,string subscriberName);
         Task UnsubscribeUser(int userId, string subscriberName);
         Task SendNotification(int userId, string message);
-        Task<List<string>> GetNotificaiton(int userId);
+        IEnumerable<string> GetNotificaiton(int userId);
+        IEnumerable<SubscribedUser> GetUserSubscribers(int userId);
 
 }

@@ -17,17 +17,10 @@ namespace TestTask.Controllers;
 [ApiController]
 public class NotifyController : ControllerBase
 {
-
-    private readonly AppDbContext _context;
-    private readonly IAuthService _user;
-    private readonly IEstateService _estate;
     private readonly INotifyService _notify;
 
-    public NotifyController(AppDbContext context, IAuthService user, IEstateService estate, INotifyService notify) 
+    public NotifyController(INotifyService notify) 
     {
-        _context = context;
-        _user = user;
-        _estate = estate;
         _notify = notify;
     }
 
@@ -35,35 +28,79 @@ public class NotifyController : ControllerBase
     [Route("subscribe")]
     public async Task<IActionResult> Subscribe(string subscriberName)
     {
-        var userId = Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
-        await _notify.SubscribeUser(userId, subscriberName);
-        return Ok();
+        try
+        {
+            var userId = Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            await _notify.SubscribeUser(userId, subscriberName);
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status400BadRequest, ex.Message);
+        }
     }
     [HttpGet]
     [Route("getnotifications")]
-    public async Task<IActionResult> GetNotifications()
+    public IActionResult GetNotifications()
     {
-        var userId = Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
-        List<string> notifications = await _notify.GetNotificaiton(userId);
-        return Ok(notifications);
+        try
+        {
+            var userId = Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            var notifications = _notify.GetNotificaiton(userId);
+            return Ok(notifications);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status400BadRequest, ex.Message);
+        }
+    }
+
+    [HttpGet]
+    [Route("getsubscribers")]
+    public IActionResult GetSubscribers()
+    {
+        try
+        {
+            var userId = Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            var notifications = _notify.GetUserSubscribers(userId);
+            return Ok(notifications);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status400BadRequest, ex.Message);
+        }
     }
 
     [HttpPost]
     [Route("unsubscribe")]
     public async Task<IActionResult> UnSubscribe(string subscriberName)
     {
-        var userId = Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
-        await _notify.UnsubscribeUser(userId, subscriberName);
-        return Ok();
+        try
+        {
+            var userId = Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            await _notify.UnsubscribeUser(userId, subscriberName);
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status400BadRequest, ex.Message);
+        }
     }
 
     [HttpPost]
     [Route("sendnotification")]
     public async Task<IActionResult> SendNotification(string message)
     {
-        var userId = Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
-        await _notify.SendNotification(userId, message);
-        return Ok();
+        try
+        {
+            var userId = Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            await _notify.SendNotification(userId, message);
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status400BadRequest, ex.Message);
+        }
     }
 
 }

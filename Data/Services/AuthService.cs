@@ -24,9 +24,11 @@ public class AuthService : IAuthService
         };
 
         var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-        var principal = new ClaimsPrincipal(identity);
-        await _httpContext.HttpContext.SignInAsync(principal);
-        
+        await _httpContext.HttpContext?.SignInAsync(new ClaimsPrincipal(identity))!;
+    }
+    public async Task SignOutUser()
+    { 
+        await _httpContext.HttpContext?.SignOutAsync()!;
     }
 
         public async Task<bool> TrySignIn(LoginUserModel user)
@@ -60,16 +62,6 @@ public class AuthService : IAuthService
                 {
                     return false;
                 }
-        }
-
-        public UserModel GetUserById(int Id)
-        {
-            UserModel user = _context.Users.FirstOrDefault(user => user.Id == Id);
-            if(user is not null)
-            {
-                return user;
-            }
-            return null!;
         }
 
 }

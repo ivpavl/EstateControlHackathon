@@ -5,12 +5,10 @@ namespace TestTask.Data.Services;
 public class BankingService : IBankingService
 {
     private readonly AppDbContext _context;
-    private readonly IAuthService _user;
 
-    public BankingService(AppDbContext context, IAuthService user)
+    public BankingService(AppDbContext context)
     {
         _context = context;
-        _user = user;
     }
 
     public async Task AddCard(CardModel card, int userId)
@@ -35,10 +33,10 @@ public class BankingService : IBankingService
     {
         try
         {
-            UserModel user = _context.Users.Include(user => user.Card).FirstOrDefault(user => user.Id == userId)!;
-            if(user is not null)
+            CardModel card = _context.Cards.FirstOrDefault(card => card.UserId == userId)!;
+            if(card is not null)
             {
-                user.Card = null;
+                _context.Cards.Remove(card);
                 await _context.SaveChangesAsync();
             }
         }
@@ -47,21 +45,14 @@ public class BankingService : IBankingService
             throw;
         }
     }
-    public async Task<CardModel> GetCardInfo(int userId)
+    public CardModel GetCardInfo(int userId)
     {
-        try
+        UserModel user = _context.Users.Include(user => user.Card).FirstOrDefault(user => user.Id == userId)!;
+        if(user is not null && user.Card is not null)
         {
-            UserModel user = _context.Users.Include(user => user.Card).FirstOrDefault(user => user.Id == userId)!;
-            if(user is not null && user.Card is not null)
-            {
-                return user.Card;
-            }
-            return null;
+            return user.Card;
         }
-        catch
-        {
-            throw;
-        }
+        throw new Exception("User or user card not found!");
     }
 
     public async Task Transfer(int userId, string transferToUserName, int amout)
@@ -93,7 +84,7 @@ public class BankingService : IBankingService
     {
         try
         {
-            UserModel user = _user.GetUserById(userId);
+            var user = _context.Users.Where(u => u.Id == userId).FirstOrDefault();
             if(user is not null && user.Card is not null)
             {
                 user.Card.VirtualMoney += amout;

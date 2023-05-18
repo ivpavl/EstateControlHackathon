@@ -30,7 +30,7 @@ builder.Services.AddAuthorization();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
 .AddCookie("Cookies", options =>
            {
-               options.LoginPath = "/account/login";
+               options.LoginPath = "/home/login";
                options.ExpireTimeSpan = TimeSpan.FromHours(1);
            });
 

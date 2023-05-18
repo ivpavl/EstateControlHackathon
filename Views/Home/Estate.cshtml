@@ -14,37 +14,49 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="/src/styles.css" />
-    <link rel="stylesheet" href="/src/real_estate.css" />
     <title>Моя нерухомість</title>
   </head>
   <body>
     <nav class="navbar">
       <div class="container-fluid">
         <div class="page-name">Моя нерухомість</div>
-        <div class="link"><a href="/my_account.html">Мій кабінет</a></div>
       </div>
     </nav>
-    <div class="container">
-      <div class="row">
-        <div class="col-7">
-          <a asp-controller="Home" asp-action="AddUnit"class="add-unit button">
+    <div class="">
+      <div class="">
+        <div class="estate-list">
+        </div>
+          <a asp-controller="Home" asp-action="AddEstate"class="add-unit button">
             <i class="fa-solid fa-circle-plus"></i>
             Додати нерухомість
           </a>
-        </div>
-        <div class="filters col-4">
-          <div class="buttons-first-row">
-            <button class="button filter-button">Продано</button>
-            <button class="button filter-button">Активно</button>
-            <button class="button filter-button">В оренді</button>
-          </div>
-          <div class="buttons-second-row">
-            <button class="button filter-button">Готово для оренди</button>
-            <button class="button filter-button">Архівовано</button>
-          </div>
-        </div>
       </div>
     </div>
+      <script>
+      fetch('/api/Estate/getlist')
+      .then(response => response.json())
+      .then(data => {
+        const estateList = data.userEstateList;
+        const html = estateList.map(estate => {
+          return `
+            <div class="">
+              <div class="">
+                <div class="description">
+                  Адреса: ${estate.Address}
+                </div>
+                <div class="status">${estate.StatusId === 0 ? 'В оренді' : 'Продано'}</div>
+              </div>
+              <div class="area description">Площа: ${estate.Area} кв.м.</div>
+              <div class="rooms description">Кількість кімнат: ${estate.RoomsNum}</div>
+              <div class="price description">${estate.Price} грн</div>
+              <img class="" style="width: 300px" src="/uploads/${estate.Photo}" />
+            </div>
+            <br><br>
+          `;
+        }).join('');
+        
+        document.querySelector('.estate-list').innerHTML = html;
+      });
+    </script>
   </body>
 </html>

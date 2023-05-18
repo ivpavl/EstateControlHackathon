@@ -1,3 +1,6 @@
+@model IEnumerable<SubscribedUser>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -6,5 +9,107 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Налаштування сповіщеннь</title>
   </head>
-  <body></body>
+  <body>
+    <div>
+      <div>
+
+        <div>
+          <h3>Subscribed users:</h1>
+          @foreach (var sub in Model)
+          {
+            <p>@sub.SubscriberName</p>
+          }
+        </div>
+
+        <div>
+          <h3>Your notifications:</h1>
+          <ul id="messageBlock">
+            
+          </ul>
+        </div>
+
+      </div>
+
+      <br><br>
+
+      <div>
+          <p>
+              <label>Add new user by Name:</label><br />
+              <input type="text" id="addName" />
+          </p>
+          <input type="submit" id="addSubscriber" value="Add subscriber"/>
+      </div>
+
+      <div>
+          <p>
+              <label>Remove user by Name:</label><br />
+              <input type="text" id="removeName" />
+          </p>
+          <input type="submit" id="removeSubscriber" value="Remove subscriber" />
+      </div>
+
+      <br><br>
+
+      <div>
+          <p>
+              <label>Send your message to all subscribers:</label><br />
+              <input type="text" id="message" />
+          </p>
+          <input type="submit" id="sendMessage" value="Send!" />
+      </div>
+
+
+
+
+    </div>
+    <script>
+        const getNotifications = async () => {
+          try {
+            const response = await fetch('/api/Notify/getnotifications', {
+              method: 'GET',
+              headers: {
+                'Accept': 'application/json',
+              }
+            });
+            const messages = await response.json();
+            for (let i = 0; i < messages.length; i++) {
+              const messageBlock = document.getElementById('messageBlock');
+              const li = document.createElement('li');
+              li.textContent = messages[i];
+              messageBlock.appendChild(li);
+            }
+          } catch (error) {
+            console.error(error);
+          }
+        };
+        document.addEventListener('DOMContentLoaded', getNotifications);
+
+
+        document.getElementById("addSubscriber").addEventListener("click", async e => {
+            e.preventDefault();
+            const response = await fetch("/api/Notify/subscribe?subscriberName=" + document.getElementById("addName").value, {
+                method: "POST",
+            });
+            console.log(response.status);
+            location.reload();
+        });  
+
+        document.getElementById("removeSubscriber").addEventListener("click", async e => {
+            e.preventDefault();
+            const response = await fetch("/api/Notify/unsubscribe?subscriberName=" + document.getElementById("removeName").value, {
+                method: "POST",
+            });
+            console.log(response.status);
+            location.reload();
+        });  
+        document.getElementById("sendMessage").addEventListener("click", async e => {
+            e.preventDefault();
+            const response = await fetch("/api/Notify/sendnotification?message=" + document.getElementById("message").value, {
+                method: "POST",
+            });
+            console.log(response.status);
+            location.reload();
+        });  
+    </script>
+  </body>
 </html>

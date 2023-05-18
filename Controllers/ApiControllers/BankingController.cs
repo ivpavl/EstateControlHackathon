@@ -17,7 +17,6 @@ namespace TestTask.Controllers;
 [ApiController]
 public class BankingController : ControllerBase
 {
-
     private readonly IBankingService _banking;
 
     public BankingController(IBankingService banking) 
@@ -29,46 +28,80 @@ public class BankingController : ControllerBase
     [Route("add")]
     public async Task<IActionResult> AddCard(CardModel card)
     {
-        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        await _banking.AddCard(card, Convert.ToInt32(userId));
-        return Ok();
+        try
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            await _banking.AddCard(card, Convert.ToInt32(userId));
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status400BadRequest, ex.Message);
+        }
     }
 
     [HttpDelete]
     [Route("remove")]
     public async Task<IActionResult> RemoveUserCard()
     {
-        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        await _banking.RemoveCard(Convert.ToInt32(userId));
-        return Ok();
+        try
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            await _banking.RemoveCard(Convert.ToInt32(userId));
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status400BadRequest, ex.Message);
+        }
     }
     
     [HttpPost]
     [Route("transfer")]
     public async Task<IActionResult> Transfer(string transferToUserName, int amout)
     {
-        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        await _banking.Transfer(Convert.ToInt32(userId), transferToUserName, amout);
-        return Ok();
+        try
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            await _banking.Transfer(Convert.ToInt32(userId), transferToUserName, amout);
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status400BadRequest, ex.Message);
+        }
     }
 
     [HttpGet]
     [Route("info")]
-    public async Task<IActionResult> GetCardInfo()
+    public IActionResult GetCardInfo()
     {
-        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        CardModel card = await _banking.GetCardInfo(Convert.ToInt32(userId));
-        if(card is not null) card.User = null;
-        return Ok(card);
+        try
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            CardModel card = _banking.GetCardInfo(Convert.ToInt32(userId));
+            return Ok(card);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status400BadRequest, ex.Message);
+        }
     }
 
     [HttpPost]
     [Route("addmoney")]
     public async Task<IActionResult> AddMoney(int amout)
     {
-        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        await _banking.AddMoney(Convert.ToInt32(userId), amout);
-        return Ok();
+        try
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            await _banking.AddMoney(Convert.ToInt32(userId), amout);
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status400BadRequest, ex.Message);
+        }
     }
 
 }

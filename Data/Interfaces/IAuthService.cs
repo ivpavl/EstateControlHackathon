@@ -5,6 +5,5 @@ public interface IAuthService
 {
         Task<bool> TrySignIn(LoginUserModel user);
         Task<bool> TrySignUp(LoginUserModel user);
-        UserModel GetUserById(int Id);
-
+        Task SignOutUser();
 }

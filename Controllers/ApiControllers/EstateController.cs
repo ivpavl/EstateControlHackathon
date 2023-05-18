@@ -17,66 +17,57 @@ namespace TestTask.Controllers;
 [ApiController]
 public class EstateController : ControllerBase
 {
-
-    private readonly AppDbContext _context;
-    private readonly IAuthService _user;
     private readonly IEstateService _estate;
-    private readonly IWebHostEnvironment _environment;
 
-    public EstateController(AppDbContext context, IAuthService user, IEstateService estate, IWebHostEnvironment environment) 
+    public EstateController(IEstateService estate) 
     {
-        _context = context;
-        _user = user;
         _estate = estate;
-        _environment = environment;
     }
 
     [HttpGet]
     [Route("getlist")]
-    public async Task<IActionResult> GetEstateList()
+    public IActionResult GetEstateList()
     {
-        var userId = Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
-        List<EstateModel> userEstateList = _estate.GetEstatesListByUserId(userId);
-        return Ok(new {userEstateList});
+        try
+        {
+            var userId = Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            var userEstateList = _estate.GetEstatesListByUserId(userId);
+            return Ok(new {userEstateList});
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status400BadRequest, ex.Message);
+        }
     }
 
-    [HttpPost]
-    [Route("getlist")]
-    public async Task<IActionResult> GetEstateListByStatus(int statusId)
-    {
-        var userId = Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
-        List<EstateModel> userEstateList = _estate.GetEstatesListByUserId(userId, statusId);
-        return Ok(new {userEstateList});
-    }
-
-    // [HttpPost]
-    // [Route("")]
-    // public async Task<IActionResult> AddEstate(EstateModel estate)
-    // {
-    //     var userId = Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
-    //     UserModel user = _user.GetUserById(userId);
-    //     estate.User = user;
-
-    //     await _estate.AddEstate(estate);
-
-    //     return Ok();
-    // }
-
-    [HttpPost]
+    [HttpDelete]
     [Route("remove")]
     public async Task<IActionResult> RemoveEstate(int estateId)
     {
-        await _estate.RemoveEstateById(estateId);
-
-        return Ok();
+        try
+        {
+            await _estate.RemoveEstateById(estateId);
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status400BadRequest, ex.Message);
+        }
     }
     
     [HttpPost]
     [Route("editstatus")]
     public async Task<IActionResult> EditEstate(int estateId, int statusId)
     {
-        await _estate.ChangeStatus(estateId, statusId);
-        return Ok();
+        try
+        {
+            await _estate.ChangeStatus(estateId, statusId);
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status400BadRequest, ex.Message);
+        }
     }
 
 
@@ -93,7 +84,7 @@ public class EstateController : ControllerBase
         }
         catch (Exception ex)
         {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            return StatusCode(StatusCodes.Status400BadRequest, ex.Message);
         }
     }
 }

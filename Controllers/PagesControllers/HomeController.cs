@@ -13,6 +13,13 @@ namespace TestTask.Controllers;
 [Authorize]
 public class HomeController : Controller
 {
+    IBankingService _banking;
+    INotifyService _notification;
+    public HomeController(IBankingService banking, INotifyService notification)
+    {
+        _banking = banking;
+        _notification = notification;
+    }
 
     [AllowAnonymous]
     public IActionResult Login()
@@ -23,31 +30,24 @@ public class HomeController : Controller
     {
         return View();
     }
-    public IActionResult MyCab()
+    public IActionResult MyCabinet()
     {
         return View();
     }
     public IActionResult Notification()
     {
-        return View();
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        return View(_notification.GetUserSubscribers(Convert.ToInt32(userId)));
     }
     public IActionResult AddCard()
     {
-        return View();
-    }
-    public IActionResult PaymentHistory()
-    {
-        return View();
-    }
-    public IActionResult AddUnit()
-    {
-        return View();
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        return View(_banking.GetCardInfo(Convert.ToInt32(userId)));
     }
 
     public IActionResult Index()
     {
-        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        return View(new UserModel(){Id=1, Name="2", Password = "3"});
+        return View();
     }
     public IActionResult Estate()
     {

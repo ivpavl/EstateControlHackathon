@@ -13,7 +13,7 @@ public class NewEstateModel
 
     public int StatusId {get; set;}
 
-    public IFormFile File{ get; set; }
+    public IFormFile File{ get; set; } = null!;
     public string? Notes {get; set;} = null!;
     public int UserId { get; set;}
 

@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model CardModel
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -45,14 +47,15 @@
 
     </div>
 
-    <form action="">
+
+    <form id="addCardForm">
         <div class="inputBox">
             <span>Номер картки</span>
-            <input type="text" maxlength="16" class="card-number-input">
+            <input type="text" id="Number" maxlength="16" class="card-number-input">
         </div>
         <div class="inputBox">
             <span>card holder</span>
-            <input type="text" class="card-holder-input">
+            <input type="text" id="Name" class="card-holder-input">
         </div>
         <div class="flexbox">
             <div class="inputBox">
@@ -89,17 +92,47 @@
             </div>
             <div class="inputBox">
                 <span>cvv</span>
-                <input type="text" maxlength="4" class="cvv-input">
+                <input type="text" id="CVV" maxlength="4" class="cvv-input">
             </div>
         </div>
-        <input type="submit" value="submit" class="submit-btn">
+        <input type="submit" value="submit" id="submitCard" class="submit-btn">
     </form>
+    @if(Model?.Number is not null)
+    {
+        <div>You have already attached card! Card number: @Model.Number, CVV: @Model.CVV</div>
+        <button id="removeCard">Remove?</button>
+    }
 
 </div>    
     
 
 
+<script>
+    document.getElementById("submitCard").addEventListener("click", async e => {
+    e.preventDefault();
+    const response = await fetch("/api/banking/add", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            Name: document.getElementById("Name").value,
+            Number: document.getElementById("Number").value,
+            CVV: document.getElementById("CVV").value,
+            Date: "No date! Check form script"
+        })
+    });
+    console.log(response.status);
+    location.reload();
+    }); 
 
+    
+    document.getElementById("removeCard").addEventListener("click", async e => {
+    const response = await fetch("/api/banking/remove", {
+        method: "DELETE",
+    });
+    console.log(response.status);
+    location.reload();
+    }); 
+</script>
 
 
 <script>

@@ -12,20 +12,9 @@ public class EstateService : IEstateService
         _context = context;
     }
 
-
-    public List<EstateModel> GetEstatesListByUserId(int userId)
+    public IEnumerable<EstateModel> GetEstatesListByUserId(int userId)
     {
-        List<EstateModel> list = _context.Estates.Where(e => e.UserId == userId).ToList();
-        foreach(EstateModel estate in list)
-            estate.User = null; // To ensure that cycle User.EstateMode.User.Estatemodel... wont happen
-        return list;
-    }
-    public List<EstateModel> GetEstatesListByUserId(int userId, int statusId)
-    {
-        List<EstateModel> list = _context.Estates.Where(e => e.UserId == userId && e.StatusId == statusId).ToList();
-        foreach(EstateModel estate in list)
-            estate.User = null; // To ensure that cycle User.EstateMode.User.Estatemodel... wont happen
-
+        IEnumerable<EstateModel> list = _context.Estates.Where(e => e.UserId == userId).ToList();
         return list;
     }
     public async Task AddEstate(NewEstateModel estate)
@@ -40,7 +29,7 @@ public class EstateService : IEstateService
             StatusId = estate.StatusId,
             Notes = estate?.Notes!,
             Photo = photoPath,
-            UserId = estate.UserId
+            UserId = estate!.UserId
         };
 
         await _context.Estates.AddAsync(newEstate);
@@ -52,9 +41,17 @@ public class EstateService : IEstateService
         _context.Estates.Remove(new EstateModel(){Id = estateId});
         await _context.SaveChangesAsync();
     }
+    
+    public async Task ChangeStatus(int estateId, int newStatusId)
+    {
+        EstateModel estate = _context.Estates.FirstOrDefault(est => est.Id == estateId)!;
+        if (estate is null)
+            throw new Exception("Estate not found by id");
 
-
-    public async Task<string> UploadImage(IFormFile photo)
+        estate.StatusId = newStatusId;
+        await _context.SaveChangesAsync();
+    }
+    private async Task<string> UploadImage(IFormFile photo)
     {
         try
         {
@@ -73,18 +70,5 @@ public class EstateService : IEstateService
             return null!;
         }
     }
-
-
-    
-    public async Task ChangeStatus(int estateId, int newStatusId)
-    {
-        EstateModel estate = _context.Estates.FirstOrDefault(est => est.Id == estateId)!;
-        if (estate is null)
-            throw new Exception("Estate not found by id");
-
-        estate.StatusId = newStatusId;
-        await _context.SaveChangesAsync();
-    }
-        // throw new NotImplementedException();
 
 }

@@ -5,96 +5,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Home</title>
-    <link rel="stylesheet" href="/src/registration.css">
+    @* <link rel="stylesheet" href="/src/registration.css">
     <link rel="stylesheet" href="/src/styles.css">
     <link rel="preconnect" href="http://fonts.googleapis.com ">
     <link rel="preconnect" href="http://fonts.gstatic.com ">
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap ">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap "> *@
   </head>
   <body>
     <header>
-      <h1>My Home</h1>
-     <div> 
+      <h1>Hello, @User.Identity!.Name!</h1>
+      <div> 
         <nav>
-        <ul>
-          <li><a asp-controller="Home" asp-action="MyCab">Увійти  у кабінет</a></li>
-          <li><a href="Зареєструватись">Зареєструватися</a></li>
-         
-         </ul>
-       </nav>
-     </div>
+          <ul>
+            <li><a style="font-size: x-large" asp-controller="Home" asp-action="MyCabinet">Кабінет</a></li>
+            <li><button id="logoff" onclick="submitForm()">Logoff</button></li>
+          </ul>
+        </nav>
+      </div>
    </header>
    
-  <section id="about">
-        <h2>Про нас</h2>
-        <p class="text"> Привіт.Це онлайн-інструмент для власників квартир, 
-            який допоможе вам організувати і керувати своєю власністю, збирати та організовувати різну інформацію.</p>
-      </section>
-      <section id="features">
-        <h2>Особливості</h2>
-        <ul>
-          <li class="text">Можливість управлінням нерухомістю</li>
-          <li class="text">Фідстежування статусів та  фінансофих операцій </li>
-          <li class="text">Фідстежування інших додткових функцій 
-            для власників нерухомості</li>
-        </ul>
-        </section>
-     <h2>Наші контакти</h2>
-      <div>
-        <p class="text">+380928842169</p>
-        <p class="text">+380925385384</p>
-      </div>  
-      <div>
-        <p class="text">Залишились запитання:)?</p>
-        <label class="text" for="phone">Залиш номер телефону і ми тобі зателефонуємо:
-        </label>
-		<input class="input" placeholder="phone" type="tel" id="phone" name="phone">
-      </div>
-     
-  <div> 
-    <div class="button">
-        <a href="#" id="open_pop_up">Створити обліковий запис</a>
-      </div>
-      <div class="pop_up" id="pop_up">
-        <div class="pop_up_container">
-         <div class="pop_up_body" id="pop_up_body">
-              <p>Введіть ваші дані</p>
-              <form class="js-form" action="novalidate">
-                <input class="input js-input" type="text" placeholder="Ім'я">
-                <input class="input js-input" type="text" placeholder="Прізвище">
-                <input class="input js-input" type="tel"  placeholder="Телефон">
-                <input class="input js-input" type="email" placeholder="Емейл">
-                <input class="input js-input" type="password" placeholder="Пароль">
-                <button>Реєстрація</button> 
-               </form>
-            <div class="pop_up_close" id="pop_up_close">&#10006</div>
-          </div>
-        </div>
-      </div>
-      <script src="src/registration.js"></script>
-</div>
-<br><br>
-<div> 
-  <div class="button">
-    <a href="#" id="open_pop_up_2">Вхід</a>
-  </div>
-  <div class="pop_up" id="pop_up_2">
-    <div class="pop_up_container">
-      <div class="pop_up_body" id="pop_up_body_2">
-        <p>Введіть ваші дані</p>
-        <form  action="novalidate">
-          <input  type="tel"  placeholder="Телефон">
-          <input  type="email" placeholder="Емайл">
-          <input  type="password" placeholder="Пароль">
-          <button>Увійти</button> 
-        </form>
-        <div class="pop_up_close" id="pop_up_close_2">&#10006</div>
-      </div>
-    </div>
-  </div>
-  <script src="src/login.js"></script>
-</div>
-
+  <script>
+    document.getElementById("logoff").addEventListener("click", async e => {
+        const response = await fetch("/api/Auth/signout", {
+            method: "POST"
+        });
+        console.log(response.status);
+        document.location.href="/";
+    }); 
+  </script>
      
   </body>
 </html>
